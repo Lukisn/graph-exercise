@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "list.h"
 
 
@@ -20,6 +21,18 @@ void clear_list(struct LinkedList* list)
     // TODO: ...
 }
 
+bool is_empty(struct LinkedList* list)
+{
+    printf("checking emptyness of list <%p>.\n", list);
+
+    if (list->head == NULL) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 void print_list(struct LinkedList* list)
 {
     printf("printing list <%p>.\n", list);
@@ -27,12 +40,20 @@ void print_list(struct LinkedList* list)
     struct Node* current_node = list->head;
 
     printf("[");
+    /*// alternative implementation using while:
     while (current_node != NULL) {
         printf("%d", current_node->element);
         if (current_node->next != NULL) {
             printf(", ");
         }
-        current_node = current_node->next;
+        current_node = current_node->next;  // important!
+    }
+    */
+    for (;current_node != NULL; current_node = current_node->next) {
+        printf("%d", current_node->element);
+        if (current_node->next != NULL) {
+            printf(", ");
+        }
     }
     printf("]\n");
 }
@@ -47,7 +68,7 @@ void add_element(struct LinkedList* list, int elem)
     new_node->next = NULL;
 
     // add new element to the linked list by moving the pointers:
-    if (list->head == NULL) {  // empty list
+    if (is_empty(list)) {  // empty list
         list->head = new_node;
         list->tail = new_node;
         printf("list.head %p\n", list->head);
@@ -63,5 +84,19 @@ bool delete_element(struct LinkedList* list, int elem)
 {
     printf("deleting element %d from list <%p>.\n", elem, list);
 
-    // TODO: 
+    struct Node* current_node = list->head;
+
+    if (is_empty()) {  // empty list, nothing to delete
+        return false;
+    }
+    else {  // list contains elements
+        for (;current_node != NULL; current_node = current_node->next) {
+            if (current_node->element == element) {
+                // TODO: delete element:
+                // head, tail, inner ?!
+            }
+            // else: do nothing and continue
+        }
+    }
+    return true;
 }
