@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include "list.h"
 
 
@@ -18,12 +17,25 @@ void clear_list(struct LinkedList* list)
 {
     printf("clearing list <%p>.\n", list);
 
-    // TODO: ...
+    struct Node* garbage = NULL;
+    struct Node* current = list->head;
+
+    // delete all nodes but the last:
+    for (; list->head != list->tail; current = current->next) {
+        list->head = current->next;  // advance head pointer to next Node
+        garbage = current;
+        free(garbage);
+    }
+
+    // delete last node:
+    list->head = NULL;
+    list->tail = NULL;
+    free(current);
 }
 
 bool is_empty(struct LinkedList* list)
 {
-    printf("checking emptyness of list <%p>.\n", list);
+    //printf("checking emptyness of list <%p>.\n", list);
 
     if (list->head == NULL) {
         return true;
@@ -35,7 +47,7 @@ bool is_empty(struct LinkedList* list)
 
 void print_list(struct LinkedList* list)
 {
-    printf("printing list <%p>.\n", list);
+    //printf("printing list <%p>.\n", list);
 
     struct Node* current_node = list->head;
 
@@ -84,16 +96,33 @@ bool delete_element(struct LinkedList* list, int elem)
 {
     printf("deleting element %d from list <%p>.\n", elem, list);
 
-    struct Node* current_node = list->head;
+    struct Node* previous = NULL;
+    struct Node* current = list->head;
 
-    if (is_empty()) {  // empty list, nothing to delete
+    if (is_empty(list)) {  // empty list, nothing to delete
         return false;
     }
     else {  // list contains elements
-        for (;current_node != NULL; current_node = current_node->next) {
-            if (current_node->element == element) {
+        for (; current != NULL; previous = current, current = current->next) {
+            //printf("current: <%p>, previous: <%p>\n", current, previous);
+            if (current->element == elem) {
                 // TODO: delete element:
-                // head, tail, inner ?!
+                if (current == list->head) {
+                    list->head = current->next;
+                    current->next = NULL;  // ??? needed
+                    free(current);
+                }
+                // FIXME: case head == tail, one element list?!?!
+                else if (current == list->tail) {
+                    list->tail = previous;
+                    previous->next = NULL;
+                    free(current);
+                }
+                else {  // current is inner node
+                    previous->next = current->next;
+                    current->next = NULL;
+                    free(current);
+                }
             }
             // else: do nothing and continue
         }
