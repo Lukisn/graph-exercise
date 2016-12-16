@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "list.h"
 
 
@@ -7,6 +8,7 @@ int main(void)
     struct LinkedList list;
     list = create_list();
     print_list(&list);
+    printf("is_empty? -> %d; has_elements? -> %d\n", is_empty(&list), has_elements(&list));
 
     // adding elements:
     add_element(&list, 3);
@@ -17,21 +19,26 @@ int main(void)
     add_element(&list, 7);
     add_element(&list, 2);
     print_list(&list);
+    printf("is_empty? -> %d; has_elements? -> %d\n", is_empty(&list), has_elements(&list));
 
     // deleting elements:
     delete_element(&list, 5);  // inner
     delete_element(&list, 7);  // inner
     delete_element(&list, 3);  // head
     delete_element(&list, 2);  // tail
-    delete_element(&list, 99);  // BOGO!
-    delete_element(&list, -99);  // BOGO!
+    delete_element(&list, 99);  // unknown element
+    delete_element(&list, -99);  // unknown element
     print_list(&list);
 
     // clear list:
-    clear_list(&list);
+    clear_list(&list);  // clear list containing elements
+    clear_list(&list);  // clear already empty list
     print_list(&list);
 
-    clear_list(&list);
+    // test one element deletion:
+    add_element(&list, 42);
+    print_list(&list);
+    delete_element(&list, 42);
     print_list(&list);
 
     return 0;
