@@ -14,7 +14,7 @@ struct LinkedList
     Node* tail;
 };
 
-LinkedList create_list(void);
+LinkedList create_list();
 void clear_list(LinkedList* list);
 bool is_empty(LinkedList* list);
 bool has_elements(LinkedList* list);
