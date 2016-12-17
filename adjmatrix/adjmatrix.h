@@ -10,3 +10,5 @@ AdjMatrix create_adjmatrix(int dim);
 void add_edge(AdjMatrix* adjmatrix, int from, int to);
 void remove_edge(AdjMatrix* adjmatrix, int from, int to);
 void test_edge(AdjMatrix* adjmatrix, int from, int to);
+
+AdjMatrix build_adjmatrix_from_band(int dim, int bandwidth);

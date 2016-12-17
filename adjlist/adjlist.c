@@ -25,3 +25,10 @@ void test_edge(AdjList* adjlist, int from, int to)
 {
 
 }
+
+AdjList build_adjlist_from_band(int dim, int bandwidth)
+{
+    AdjList adjlist = create_adjlist(dim);
+    // TODO: add edges according to bandwidth
+    return adjlist;
+}

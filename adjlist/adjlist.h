@@ -12,3 +12,5 @@ AdjList create_adjlist(int dim);
 void add_edge(AdjList* adjlist, int from, int to);
 void remove_edge(AdjList* adjlist, int from, int to);
 void test_edge(AdjList* adjlist, int from, int to);
+
+AdjList build_adjlist_from_band(int dim, int bandwidth);
