@@ -2,21 +2,20 @@
 #include <stdio.h>
 #include "list.h"
 
-
-struct LinkedList create_list()
+LinkedList create_list()
 {
     // setup empty list: (no nodes -> head and tail point to NULL)
-    struct LinkedList list;
+    LinkedList list;
     list.head = NULL;
     list.tail = NULL;
     return list;
 }
 
-void clear_list(struct LinkedList* list)
+void clear_list(LinkedList* list)
 {
     // setup pointers:
-    struct Node* garbage = NULL;  // pointer to node ready for deletion
-    struct Node* current = list->head;  // pointer to current node for stepping
+    Node* garbage = NULL;  // pointer to node ready for deletion
+    Node* current = list->head;  // pointer to current node for stepping
 
     // delete all nodes but the last:
     for (; list->head != list->tail; current = current->next) {
@@ -31,7 +30,7 @@ void clear_list(struct LinkedList* list)
     free(current);
 }
 
-bool is_empty(struct LinkedList* list)
+bool is_empty(LinkedList* list)
 {
     if (list->head == NULL) {  // no nodes -> head points to NULL:
         return true;
@@ -41,15 +40,15 @@ bool is_empty(struct LinkedList* list)
     }
 }
 
-bool has_elements(struct LinkedList* list)
+bool has_elements(LinkedList* list)
 {
     return !is_empty(list);
 }
 
-void print_list(struct LinkedList* list)
+void print_list(LinkedList* list)
 {
     // setup pointer for stepping through the linked list:
-    struct Node* current = list->head;
+    Node* current = list->head;
 
     printf("[");  // opening brace
     // step through the the list to print every entry:
@@ -62,10 +61,10 @@ void print_list(struct LinkedList* list)
     printf("]\n");  // closing brace and new line
 }
 
-void add_element(struct LinkedList* list, int elem)
+void add_element(LinkedList* list, int elem)
 {
     // create new element in the heap:
-    struct Node* new_node = malloc(sizeof(struct Node));
+    Node* new_node = malloc(sizeof(Node));
     new_node->element = elem;
     new_node->next = NULL;
 
@@ -75,17 +74,17 @@ void add_element(struct LinkedList* list, int elem)
         list->tail = new_node;
     }
     else {  // list already contains elements:
-        struct Node* last = list->tail;  // get current last element of the list
+        Node* last = list->tail;  // get current last element of the list
         last->next = new_node;
         list->tail = new_node;
     }
 }
 
-bool delete_element(struct LinkedList* list, int elem)
+bool delete_element(LinkedList* list, int elem)
 {
     // setup pointers for stepping through the list:
-    struct Node* previous = NULL;
-    struct Node* current = list->head;
+    Node* previous = NULL;
+    Node* current = list->head;
 
     if (is_empty(list)) {  // empty list, nothing to delete
         return false;

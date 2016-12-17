@@ -1,23 +1,25 @@
 #include <stdbool.h>
 
+typedef struct Node Node;
 struct Node
 {
     int element;
-    struct Node* next;
+    Node* next;
 };
 
+typedef struct LinkedList LinkedList;
 struct LinkedList
 {
-    struct Node* head;
-    struct Node* tail;
+    Node* head;
+    Node* tail;
 };
 
-struct LinkedList create_list(void);
-void clear_list(struct LinkedList* list);
-bool is_empty(struct LinkedList* list);
-bool has_elements(struct LinkedList* list);
+LinkedList create_list(void);
+void clear_list(LinkedList* list);
+bool is_empty(LinkedList* list);
+bool has_elements(LinkedList* list);
 
-void print_list(struct LinkedList* list);
+void print_list(LinkedList* list);
 
-void add_element(struct LinkedList* list, int elem);
-bool delete_element(struct LinkedList* list, int elem);
+void add_element(LinkedList* list, int elem);
+bool delete_element(LinkedList* list, int elem);
