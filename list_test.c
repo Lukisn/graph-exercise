@@ -35,9 +35,10 @@ int main(void)
     clear_list(&list);  // clear already empty list
     print_list(&list);
 
-    // test one element deletion:
+    // test one and zero element deletion:
     add_element(&list, 42);
     print_list(&list);
+    delete_element(&list, 42);
     delete_element(&list, 42);
     print_list(&list);
 

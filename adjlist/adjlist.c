@@ -5,7 +5,7 @@ AdjList create_adjlist(int dim)
 {
     AdjList adjlist;
     adjlist.dim = dim;
-    int* neighbors = malloc(sizeof(int) * dim);
+    int* neighbors = malloc(sizeof(int) * dim);  // FIXME: LinkedList* ?
     adjlist.neighbors = neighbors;
 
     return adjlist;
