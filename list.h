@@ -1,11 +1,13 @@
 #include <stdbool.h>
 
-struct Node{
+struct Node
+{
     int element;
     struct Node* next;
 };
 
-struct LinkedList{
+struct LinkedList
+{
     struct Node* head;
     struct Node* tail;
 };
