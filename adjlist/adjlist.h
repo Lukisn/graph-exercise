@@ -1,16 +1,18 @@
+#include <stdbool.h>
 #include "../list/list.h"
 
 typedef struct AdjList AdjList;
 struct AdjList
 {
-    int dim;  // maximum number of nodes
-    int* neighbors;  // array of lists of neighbors
+    unsigned int dim;  // maximum number of nodes
+    LinkedList* neighbors;  // array of lists of neighbors
 };
 
-AdjList create_adjlist(int dim);
+AdjList al_create(unsigned int dim);
+AdjList al_build_from_band(unsigned int dim, unsigned int bandwidth);
 
-void add_edge(AdjList* adjlist, int from, int to);
-void remove_edge(AdjList* adjlist, int from, int to);
-void test_edge(AdjList* adjlist, int from, int to);
+void al_add_edge(AdjList* adjlist, unsigned int from, unsigned int to);
+void al_remove_edge(AdjList* adjlist, unsigned int from, unsigned int to);
+bool al_test_edge(AdjList* adjlist, unsigned int from, unsigned int to);
 
-AdjList build_adjlist_from_band(int dim, int bandwidth);
+void al_print(AdjList* adjlist);

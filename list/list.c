@@ -45,22 +45,6 @@ bool ll_has_elements(LinkedList* list)
     return !ll_is_empty(list);
 }
 
-void ll_print(LinkedList* list)
-{
-    // setup pointer for stepping through the linked list:
-    Node* current = list->head;
-
-    printf("[");  // opening brace
-    // step through the the list to print every entry:
-    for (; current != NULL; current = current->next) {
-        printf("%d", current->element);  // print list entry
-        if (current->next != NULL) {
-            printf(", ");  // print comma if there are more elements
-        }
-    }
-    printf("]\n");  // closing brace and new line
-}
-
 void ll_add(LinkedList* list, int elem)
 {
     // create new element in the heap:
@@ -80,7 +64,7 @@ void ll_add(LinkedList* list, int elem)
     }
 }
 
-bool ll_delete(LinkedList* list, int elem)
+bool ll_remove(LinkedList* list, int elem)
 {
     // setup pointers for stepping through the list:
     Node* previous = NULL;
@@ -109,4 +93,40 @@ bool ll_delete(LinkedList* list, int elem)
         }
     }
     return true;
+}
+
+bool ll_test(LinkedList* list, int elem)
+{
+    // setup pointers for stepping through the list:
+    Node* previous = NULL;
+    Node* current = list->head;
+
+    if (ll_is_empty(list)) {  // empty list, nothing to delete
+        return false;
+    }
+    else {  // list contains elements
+        // step through list to find node containing elem:
+        for (; current != NULL; previous = current, current = current->next) {
+            if (current->element == elem) {
+                return true;  // element found
+            }
+        }
+        return false;  // element not found
+    }
+}
+
+void ll_print(LinkedList* list)
+{
+    // setup pointer for stepping through the linked list:
+    Node* current = list->head;
+
+    printf("[");  // opening brace
+    // step through the the list to print every entry:
+    for (; current != NULL; current = current->next) {
+        printf("%d", current->element);  // print list entry
+        if (current->next != NULL) {
+            printf(", ");  // print comma if there are more elements
+        }
+    }
+    printf("]\n");  // closing brace and new line
 }

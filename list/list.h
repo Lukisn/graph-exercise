@@ -19,7 +19,8 @@ void ll_clear(LinkedList* list);
 bool ll_is_empty(LinkedList* list);
 bool ll_has_elements(LinkedList* list);
 
-void ll_print(LinkedList* list);
-
 void ll_add(LinkedList* list, int elem);
-bool ll_delete(LinkedList* list, int elem);
+bool ll_remove(LinkedList* list, int elem);
+bool ll_test(LinkedList* list, int elem);
+
+void ll_print(LinkedList* list);

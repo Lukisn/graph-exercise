@@ -5,8 +5,7 @@
 int main(void)
 {
     // creating list:
-    struct LinkedList list;
-    list = ll_create();
+    LinkedList list = ll_create();
     ll_print(&list);
     printf("is_empty? -> %d; has_elements? -> %d\n", ll_is_empty(&list), ll_has_elements(&list));
 
@@ -21,13 +20,22 @@ int main(void)
     ll_print(&list);
     printf("is_empty? -> %d; has_elements? -> %d\n", ll_is_empty(&list), ll_has_elements(&list));
 
+    // testing for elements:
+    bool success;
+    success = ll_test(&list, 5); if (!success) return 1;  // inner
+    success = ll_test(&list, 7); if (!success) return 1; // inner
+    success = ll_test(&list, 3); if (!success) return 1; // head
+    success = ll_test(&list, 2); if (!success) return 1; // tail
+    success = ll_test(&list, 99); if (success) return 1; // unknown element
+    success = ll_test(&list, -99); if (success) return 1; // unknown element
+
     // deleting elements:
-    ll_delete(&list, 5);  // inner
-    ll_delete(&list, 7);  // inner
-    ll_delete(&list, 3);  // head
-    ll_delete(&list, 2);  // tail
-    ll_delete(&list, 99);  // unknown element
-    ll_delete(&list, -99);  // unknown element
+    ll_remove(&list, 5);  // inner
+    ll_remove(&list, 7);  // inner
+    ll_remove(&list, 3);  // head
+    ll_remove(&list, 2);  // tail
+    ll_remove(&list, 99);  // unknown element
+    ll_remove(&list, -99);  // unknown element
     ll_print(&list);
 
     // clear list:
@@ -38,8 +46,8 @@ int main(void)
     // test one and zero element deletion:
     ll_add(&list, 42);
     ll_print(&list);
-    ll_delete(&list, 42);
-    ll_delete(&list, 42);
+    ll_remove(&list, 42);
+    ll_remove(&list, 42);
     ll_print(&list);
 
     return 0;

@@ -3,7 +3,7 @@
 typedef struct AdjMatrix AdjMatrix;
 struct AdjMatrix
 {
-    unsigned int dim;     // maximum number of nodes
+    unsigned int dim;  // maximum number of nodes
     int* edges;  // array containing the adjacency matrix
 };
 

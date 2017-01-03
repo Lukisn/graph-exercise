@@ -15,7 +15,7 @@ list/list.o: list/list.c
 	$(CC) -c -o $@ $^ $(CFLAGS)
 
 # adjacency list:
-adjlist_test.x: adjlist_test.o adjlist/adjlist.o
+adjlist_test.x: adjlist_test.o adjlist/adjlist.o list/list.o
 	$(CC) -o $@ $^
 
 adjlist_test.o: adjlist_test.c

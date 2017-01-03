@@ -1,34 +1,61 @@
 #include <stdlib.h>
 #include "adjlist.h"
 
-AdjList create_adjlist(int dim)
+AdjList al_create(unsigned int dim)
 {
     AdjList adjlist;
     adjlist.dim = dim;
-    int* neighbors = malloc(sizeof(int) * dim);  // FIXME: LinkedList* ?
+    LinkedList* neighbors = calloc(dim, sizeof(LinkedList));
+    // initialize:
+    for (int node = 0; node < dim; ++node) {
+        LinkedList list = ll_create();
+        neighbors[node] = list;
+    }
     adjlist.neighbors = neighbors;
-
     return adjlist;
 }
 
-void add_edge(AdjList* adjlist, int from, int to)
+AdjList al_build_from_band(unsigned int dim, unsigned int bandwidth)
 {
+    AdjList adjlist = al_create(dim);
 
+    // fill adjacency list with edges according to bandwidth:
+    if (bandwidth % 2 == 0) {  // check if bandwidth is even
+        return adjlist;
+    }
+    else {  // bandwidth is odd
+        unsigned int row, col, index;
+        unsigned int dist = (bandwidth - 1) / 2;  // distance from diagonal
+        for (row = 0; row < adjlist.dim; ++row) {
+            for (col = 0; col < adjlist.dim; ++col) {
+                if (col - row <= dist || row - col <= dist) {
+                    al_add_edge(&adjlist, row, col);
+                }
+            }
+        }
+        return adjlist;
+    }
 }
 
-void remove_edge(AdjList* adjlist, int from, int to)
+void al_add_edge(AdjList* adjlist, unsigned int from, unsigned int to)
 {
-
+    ll_add(&(adjlist->neighbors[from]), to);
 }
 
-void test_edge(AdjList* adjlist, int from, int to)
+void al_remove_edge(AdjList* adjlist, unsigned int from, unsigned int to)
 {
-
+    ll_remove(&(adjlist->neighbors[from]), to);
 }
 
-AdjList build_adjlist_from_band(int dim, int bandwidth)
+bool al_test_edge(AdjList* adjlist, unsigned int from, unsigned int to)
 {
-    AdjList adjlist = create_adjlist(dim);
-    // TODO: add edges according to bandwidth
-    return adjlist;
+    return ll_test(&(adjlist->neighbors[from]), to);
+}
+
+void al_print(AdjList* adjlist)
+{
+    unsigned int row;
+    for (row = 0; row < adjlist->dim; ++row) {
+        ll_print(&(adjlist->neighbors[row]));
+    }
 }
