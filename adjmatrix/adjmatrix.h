@@ -1,14 +1,19 @@
+#include <stdbool.h>
+
 typedef struct AdjMatrix AdjMatrix;
 struct AdjMatrix
 {
-    int dim;  // maximum number of nodes
+    unsigned int dim;     // maximum number of nodes
     int* edges;  // array containing the adjacency matrix
 };
 
-AdjMatrix create_adjmatrix(int dim);
+AdjMatrix am_create(unsigned int dim);
+AdjMatrix am_build_from_band(unsigned int dim, unsigned int bandwidth);
 
-void add_edge(AdjMatrix* adjmatrix, int from, int to);
-void remove_edge(AdjMatrix* adjmatrix, int from, int to);
-void test_edge(AdjMatrix* adjmatrix, int from, int to);
+unsigned int am_index(AdjMatrix* adjmat, unsigned int from, unsigned int to);
 
-AdjMatrix build_adjmatrix_from_band(int dim, int bandwidth);
+void am_add_edge(AdjMatrix* adjmat, unsigned int from, unsigned int to);
+void am_remove_edge(AdjMatrix* adjmat, unsigned int from, unsigned int to);
+bool am_test_edge(AdjMatrix* adjmat, unsigned int from, unsigned int to);
+
+void am_print(AdjMatrix* adjmat);

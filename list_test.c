@@ -6,41 +6,41 @@ int main(void)
 {
     // creating list:
     struct LinkedList list;
-    list = create_list();
-    print_list(&list);
-    printf("is_empty? -> %d; has_elements? -> %d\n", is_empty(&list), has_elements(&list));
+    list = ll_create();
+    ll_print(&list);
+    printf("is_empty? -> %d; has_elements? -> %d\n", ll_is_empty(&list), ll_has_elements(&list));
 
     // adding elements:
-    add_element(&list, 3);
-    add_element(&list, 5);
-    add_element(&list, 1);
-    add_element(&list, 4);
-    add_element(&list, 6);
-    add_element(&list, 7);
-    add_element(&list, 2);
-    print_list(&list);
-    printf("is_empty? -> %d; has_elements? -> %d\n", is_empty(&list), has_elements(&list));
+    ll_add(&list, 3);
+    ll_add(&list, 5);
+    ll_add(&list, 1);
+    ll_add(&list, 4);
+    ll_add(&list, 6);
+    ll_add(&list, 7);
+    ll_add(&list, 2);
+    ll_print(&list);
+    printf("is_empty? -> %d; has_elements? -> %d\n", ll_is_empty(&list), ll_has_elements(&list));
 
     // deleting elements:
-    delete_element(&list, 5);  // inner
-    delete_element(&list, 7);  // inner
-    delete_element(&list, 3);  // head
-    delete_element(&list, 2);  // tail
-    delete_element(&list, 99);  // unknown element
-    delete_element(&list, -99);  // unknown element
-    print_list(&list);
+    ll_delete(&list, 5);  // inner
+    ll_delete(&list, 7);  // inner
+    ll_delete(&list, 3);  // head
+    ll_delete(&list, 2);  // tail
+    ll_delete(&list, 99);  // unknown element
+    ll_delete(&list, -99);  // unknown element
+    ll_print(&list);
 
     // clear list:
-    clear_list(&list);  // clear list containing elements
-    clear_list(&list);  // clear already empty list
-    print_list(&list);
+    ll_clear(&list);  // clear list containing elements
+    ll_clear(&list);  // clear already empty list
+    ll_print(&list);
 
     // test one and zero element deletion:
-    add_element(&list, 42);
-    print_list(&list);
-    delete_element(&list, 42);
-    delete_element(&list, 42);
-    print_list(&list);
+    ll_add(&list, 42);
+    ll_print(&list);
+    ll_delete(&list, 42);
+    ll_delete(&list, 42);
+    ll_print(&list);
 
     return 0;
 }

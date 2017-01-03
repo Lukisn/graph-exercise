@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "list.h"
 
-LinkedList create_list()
+LinkedList ll_create()
 {
     // setup empty list: (no nodes -> head and tail point to NULL)
     LinkedList list;
@@ -11,7 +11,7 @@ LinkedList create_list()
     return list;
 }
 
-void clear_list(LinkedList* list)
+void ll_clear(LinkedList* list)
 {
     // setup pointers:
     Node* garbage = NULL;  // pointer to node ready for deletion
@@ -30,7 +30,7 @@ void clear_list(LinkedList* list)
     free(current);
 }
 
-bool is_empty(LinkedList* list)
+bool ll_is_empty(LinkedList* list)
 {
     if (list->head == NULL) {  // no nodes -> head points to NULL:
         return true;
@@ -40,12 +40,12 @@ bool is_empty(LinkedList* list)
     }
 }
 
-bool has_elements(LinkedList* list)
+bool ll_has_elements(LinkedList* list)
 {
-    return !is_empty(list);
+    return !ll_is_empty(list);
 }
 
-void print_list(LinkedList* list)
+void ll_print(LinkedList* list)
 {
     // setup pointer for stepping through the linked list:
     Node* current = list->head;
@@ -61,7 +61,7 @@ void print_list(LinkedList* list)
     printf("]\n");  // closing brace and new line
 }
 
-void add_element(LinkedList* list, int elem)
+void ll_add(LinkedList* list, int elem)
 {
     // create new element in the heap:
     Node* new_node = malloc(sizeof(Node));
@@ -69,7 +69,7 @@ void add_element(LinkedList* list, int elem)
     new_node->next = NULL;
 
     // add new element to the linked list by moving the pointers:
-    if (is_empty(list)) {  // empty list:
+    if (ll_is_empty(list)) {  // empty list:
         list->head = new_node;
         list->tail = new_node;
     }
@@ -80,13 +80,13 @@ void add_element(LinkedList* list, int elem)
     }
 }
 
-bool delete_element(LinkedList* list, int elem)
+bool ll_delete(LinkedList* list, int elem)
 {
     // setup pointers for stepping through the list:
     Node* previous = NULL;
     Node* current = list->head;
 
-    if (is_empty(list)) {  // empty list, nothing to delete
+    if (ll_is_empty(list)) {  // empty list, nothing to delete
         return false;
     }
     else {  // list contains elements

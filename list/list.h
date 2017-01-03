@@ -14,12 +14,12 @@ struct LinkedList
     Node* tail;
 };
 
-LinkedList create_list();
-void clear_list(LinkedList* list);
-bool is_empty(LinkedList* list);
-bool has_elements(LinkedList* list);
+LinkedList ll_create();
+void ll_clear(LinkedList* list);
+bool ll_is_empty(LinkedList* list);
+bool ll_has_elements(LinkedList* list);
 
-void print_list(LinkedList* list);
+void ll_print(LinkedList* list);
 
-void add_element(LinkedList* list, int elem);
-bool delete_element(LinkedList* list, int elem);
+void ll_add(LinkedList* list, int elem);
+bool ll_delete(LinkedList* list, int elem);
