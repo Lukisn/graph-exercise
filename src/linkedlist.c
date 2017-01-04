@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "list.h"
+#include "linkedlist.h"
 
 LinkedList ll_create()
 {

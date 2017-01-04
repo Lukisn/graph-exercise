@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "adjlist/adjlist.h"
+#include "adjlist.h"
 
 int main()
 {

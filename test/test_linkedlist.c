@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "list/list.h"
+#include "linkedlist.h"
 
 
 int main(void)
@@ -50,5 +50,8 @@ int main(void)
     ll_remove(&list, 42);
     ll_print(&list);
 
+    printf("\n");
+    printf("==============================\n");
+    printf("All Tests done.\n");
     return 0;
 }

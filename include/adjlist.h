@@ -1,5 +1,5 @@
 #include <stdbool.h>
-#include "../list/list.h"
+#include "linkedlist.h"
 
 typedef struct AdjList AdjList;
 struct AdjList
