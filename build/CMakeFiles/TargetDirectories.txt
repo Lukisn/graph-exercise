@@ -1,5 +1,0 @@
-/Users/Luki/CSE/WiSe16/EPA /Übung/Übung06-Graph/build/CMakeFiles/edit_cache.dir
-/Users/Luki/CSE/WiSe16/EPA /Übung/Übung06-Graph/build/CMakeFiles/rebuild_cache.dir
-/Users/Luki/CSE/WiSe16/EPA /Übung/Übung06-Graph/build/CMakeFiles/test_adjlist.dir
-/Users/Luki/CSE/WiSe16/EPA /Übung/Übung06-Graph/build/CMakeFiles/test_adjmatrix.dir
-/Users/Luki/CSE/WiSe16/EPA /Übung/Übung06-Graph/build/CMakeFiles/test_linkedlist.dir
