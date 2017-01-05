@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include "linkedlist.h"
 
+/******************************************************************************
+ * Linked List                                                                *
+ ******************************************************************************/
 LinkedList ll_create()
 {
     // setup empty list: (no nodes -> head and tail point to NULL)
@@ -124,6 +127,138 @@ void ll_print(LinkedList* list)
     // step through the the list to print every entry:
     for (; current != NULL; current = current->next) {
         printf("%d", current->element);  // print list entry
+        if (current->next != NULL) {
+            printf(", ");  // print comma if there are more elements
+        }
+    }
+    printf("]\n");  // closing brace and new line
+}
+
+/******************************************************************************
+ * Linked List Double                                                         *
+ ******************************************************************************/
+LinkedListDouble lld_create()
+{
+    // setup empty list: (no nodes -> head and tail point to NULL)
+    LinkedListDouble list;
+    list.head = NULL;
+    list.tail = NULL;
+    return list;
+}
+
+void lld_clear(LinkedListDouble* list)
+{
+    // setup pointers:
+    NodeDouble* garbage = NULL;  // pointer to node ready for deletion
+    NodeDouble* current = list->head;  // pointer to current node for stepping
+
+    // delete all nodes but the last:
+    for (; list->head != list->tail; current = current->next) {
+        list->head = current->next;  // advance head pointer to next Node
+        garbage = current;  // mark current node for deletion
+        free(garbage);  // delete garbage node
+    }
+
+    // delete last node:
+    list->head = NULL;
+    list->tail = NULL;
+    free(current);
+}
+
+bool lld_is_empty(LinkedListDouble* list)
+{
+    if (list->head == NULL) {  // no nodes -> head points to NULL:
+        return true;
+    }
+    else {  // nodes exist -> head points somewhere:
+        return false;
+    }
+}
+
+bool lld_has_elements(LinkedListDouble* list)
+{
+    return !lld_is_empty(list);
+}
+
+void lld_add(LinkedListDouble* list, double elem)
+{
+    // create new element in the heap:
+    NodeDouble* new_node = malloc(sizeof(NodeDouble));
+    new_node->element = elem;
+    new_node->next = NULL;
+
+    // add new element to the linked list by moving the pointers:
+    if (lld_is_empty(list)) {  // empty list:
+        list->head = new_node;
+        list->tail = new_node;
+    }
+    else {  // list already contains elements:
+        NodeDouble* last = list->tail;  // get current last element of the list
+        last->next = new_node;
+        list->tail = new_node;
+    }
+}
+
+bool lld_remove(LinkedListDouble* list, double elem)
+{
+    // setup pointers for stepping through the list:
+    NodeDouble* previous = NULL;
+    NodeDouble* current = list->head;
+
+    if (lld_is_empty(list)) {  // empty list, nothing to delete
+        return false;
+    }
+    else {  // list contains elements
+        // step through list to find node containing elem:
+        for (; current != NULL; previous = current, current = current->next) {
+            if (current->element == elem) {
+                if (current == list->head) {
+                    list->head = current->next;
+                    free(current);
+                }
+                else if (current == list->tail) {
+                    list->tail = previous;
+                    free(current);
+                }
+                else {  // current is inner node
+                    previous->next = current->next;
+                    free(current);
+                }
+            }  // else: do nothing and continue
+        }
+    }
+    return true;
+}
+
+bool lld_test(LinkedListDouble* list, double elem)
+{
+    // setup pointers for stepping through the list:
+    NodeDouble* previous = NULL;
+    NodeDouble* current = list->head;
+
+    if (lld_is_empty(list)) {  // empty list, nothing to delete
+        return false;
+    }
+    else {  // list contains elements
+        // step through list to find node containing elem:
+        for (; current != NULL; previous = current, current = current->next) {
+            if (current->element == elem) {
+                return true;  // element found
+            }
+        }
+        return false;  // element not found
+    }
+}
+
+void lld_print(LinkedListDouble* list)
+{
+    // setup pointer for stepping through the linked list:
+    NodeDouble* current = list->head;
+
+    printf("[");  // opening brace
+    // step through the the list to print every entry:
+    for (; current != NULL; current = current->next) {
+        printf("%f", current->element);  // print list entry
         if (current->next != NULL) {
             printf(", ");  // print comma if there are more elements
         }
